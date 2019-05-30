@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
-class DeshboardController extends Controller
+class DashboardController extends Controller
 {
+    /**
+     * Where to redirect users after/if loguot.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/mlogin';
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +25,7 @@ class DeshboardController extends Controller
      */
     public function index()
     {
-        //
+        return view('metrix/pages/deshboard');
     }
 
     /**
@@ -81,4 +93,6 @@ class DeshboardController extends Controller
     {
         //
     }
+
+
 }
