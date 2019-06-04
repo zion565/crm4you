@@ -36,7 +36,7 @@
                               <div class="card card-hover">
                                     <div class="box bg-cyan text-center">
                                           <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
-                                          <h6 class="text-white">Dashboard</h6>
+                                          <h6 class="text-white">משתמשים</h6>
                                     </div>
                               </div>
                         </div>
@@ -45,7 +45,7 @@
                               <div class="card card-hover">
                                     <div class="box bg-success text-center">
                                           <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
-                                          <h6 class="text-white">Charts</h6>
+                                          <h6 class="text-white">ניהול לקוחות</h6>
                                     </div>
                               </div>
                         </div>
@@ -54,7 +54,7 @@
                               <div class="card card-hover">
                                     <div class="box bg-warning text-center">
                                           <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
-                                          <h6 class="text-white">Widgets</h6>
+                                          <h6 class="text-white">שיחות</h6>
                                     </div>
                               </div>
                         </div>
@@ -63,7 +63,7 @@
                               <div class="card card-hover">
                                     <div class="box bg-danger text-center">
                                           <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
-                                          <h6 class="text-white">Tables</h6>
+                                          <h6 class="text-white">מכירות</h6>
                                     </div>
                               </div>
                         </div>
@@ -77,9 +77,9 @@
                                           <h4 class="card-title m-b-0">Progress Box</h4>
                                           <div class="m-t-20">
                                                 <div class="d-flex no-block align-items-center">
-                                                      <span>81% Clicks</span>
+                                                      <span>משתמשים</span>
                                                       <div class="ml-auto">
-                                                            <span>125</span>
+                                                            <span>{{count($new_customer)}}</span>
                                                       </div>
                                                 </div>
                                                 <div class="progress">
@@ -88,9 +88,9 @@
                                           </div>
                                           <div>
                                                 <div class="d-flex no-block align-items-center m-t-25">
-                                                      <span>72% Uniquie Clicks</span>
+                                                      <span>לקוחות</span>
                                                       <div class="ml-auto">
-                                                            <span>120</span>
+                                                            <span>{{count($customer)}}</span>
                                                       </div>
                                                 </div>
                                                 <div class="progress">
@@ -98,19 +98,19 @@
                                                 </div>
                                           </div>
                                           <div>
-                                                <div class="d-flex no-block align-items-center m-t-25">
-                                                      <span>53% Impressions</span>
+                                                <div class="d-flex no-block align-items-center">
+                                                      <span>מתעניינים</span>
                                                       <div class="ml-auto">
-                                                            <span>785</span>
+                                                            <span>{{count($new_customer)}}</span>
                                                       </div>
                                                 </div>
                                                 <div class="progress">
-                                                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 53%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="      width: 53%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                           </div>
                                           <div>
                                                 <div class="d-flex no-block align-items-center m-t-25">
-                                                      <span>3% Online Users</span>
+                                                      <span>מוצרים</span>
                                                       <div class="ml-auto">
                                                             <span>8</span>
                                                       </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\tbl_customer;
+use App\tbl_new_customer;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
@@ -12,7 +14,7 @@ class DashboardController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/mlogin';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -25,7 +27,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('metrix/pages/deshboard');
+        $customer = tbl_customer::all();
+        $customer_noreed = tbl_customer::where(['reed'=>0,'del'=>0])->get();
+
+        $new_customer = tbl_new_customer::all();
+        $new_customer_noreed = tbl_customer::where(['reed'=>0,'del'=>0])->get();
+
+        return view('metrix/pages/deshboard')->with(['customer' => $customer,
+            'customer_noreed' => $customer_noreed,
+            'new_customer' => $new_customer,
+            'new_customer_noreed' => $new_customer_noreed  ]);
     }
 
     /**
