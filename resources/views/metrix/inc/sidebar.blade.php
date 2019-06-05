@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('customers') }}" aria-expanded="false">
                             <i class="mdi mdi-chart-bubble"></i>
                             <span class="hide-menu">ניהול לקוחות</span>
                             &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;

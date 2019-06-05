@@ -20,5 +20,5 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/', 'MloginController@index');
 Route::get('/mlogin', 'MloginController@index');
-
+Route::get('/customers', 'DashboardController@customer');
 //Route::get('/mregister', 'MregisterController@index');

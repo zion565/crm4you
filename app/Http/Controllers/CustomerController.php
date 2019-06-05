@@ -3,28 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\tbl_customer;
-use App\tbl_new_customer;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 
-class DashboardController extends Controller
+class CustomerController extends Controller
 {
-    /**
-     * Where to redirect users after/if loguot.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-    public $customer_noreed;
-    public $new_customer_noreed;
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->customer_noreed = tbl_customer::where(['reed'=>0,'del'=>0])->get();
-        $this->new_customer_noreed = tbl_customer::where(['reed'=>0,'del'=>0])->get();
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -32,26 +14,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $customer = tbl_customer::all();
-        $new_customer = tbl_new_customer::all();
 
-        return view('metrix/pages/deshboard')->with(['customer' => $customer,
-            'customer_noreed' => $this->customer_noreed,
-            'new_customer' => $new_customer,
-            'new_customer_noreed' => $this->new_customer_noreed  ]);
-    }
-    public function customer()
-    {
-        $all_customer = tbl_customer::query()
+        $customer = tbl_customer::query()
             ->join('tbl_history_new_customer', 'tbl_customer.id', '=', 'tbl_history_new_customer.customer_id')
             ->join('tbl_status_setting', 'tbl_customer.status', '=', 'tbl_status_setting.id')
-            ->select('tbl_customer.id', 'tbl_customer.created_at', 'tbl_customer.name', 'tbl_customer.phone', 'tbl_customer.email', 'tbl_status_setting.id as status_id','tbl_status_setting.color as status_color','tbl_status_setting.title as status_title', 'tbl_history_new_customer.from_lid')
+            ->select('tbl_customer.id','tbl_customer.created_at', 'tbl_customer.name', 'tbl_customer.phone', 'tbl_customer.email','tbl_status_setting.*','tbl_history_new_customer.from_lid')
             ->get();
 
+        return view('metrix/pages/customer')->with(['customer' => $customer]);
+//        echo '<pre>'. print_r($customer,true).'</pre>';
+//        die();
 
-        return view('metrix/pages/customer')->with(['all_customer' => $all_customer,
-            'customer_noreed' => $this->customer_noreed,
-            'new_customer_noreed' => $this->new_customer_noreed]);
+
     }
 
     /**
@@ -119,6 +93,4 @@ class DashboardController extends Controller
     {
         //
     }
-
-
 }
