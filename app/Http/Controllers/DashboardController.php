@@ -45,7 +45,8 @@ class DashboardController extends Controller
         $all_customer = tbl_customer::query()
             ->join('tbl_history_new_customer', 'tbl_customer.id', '=', 'tbl_history_new_customer.customer_id')
             ->join('tbl_status_setting', 'tbl_customer.status', '=', 'tbl_status_setting.id')
-            ->select('tbl_customer.id', 'tbl_customer.created_at', 'tbl_customer.name', 'tbl_customer.phone', 'tbl_customer.email', 'tbl_status_setting.id as status_id','tbl_status_setting.color as status_color','tbl_status_setting.title as status_title', 'tbl_history_new_customer.from_lid')
+            ->select('tbl_customer.id', 'tbl_customer.created_at', 'tbl_customer.update_at', 'tbl_customer.name', 'tbl_customer.phone', 'tbl_customer.email', 'tbl_status_setting.id as status_id','tbl_status_setting.color as status_color','tbl_status_setting.title as status_title', 'tbl_history_new_customer.from_lid')
+            ->limit(100)
             ->get();
 
 

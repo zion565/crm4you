@@ -4,6 +4,13 @@
       <!-- ============================================================== -->
       <!-- Page wrapper  -->
       <!-- ============================================================== -->
+      <style >
+            .table td, .table th{
+                  padding: 2px !important;
+                  vertical-align: center !important;
+            }
+
+      </style>
       <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -42,12 +49,8 @@
                                                       <thead>
                                                       <tr>
                                                             <th>ID</th>
-                                                            <th>תאריך</th>
-                                                            <th>שם</th>
-                                                            <th>פלאפון</th>
-                                                            <th>מייל</th>
-                                                            <th>סטטוס</th>
-                                                            <th>מקור הגעה אחרון</th>
+                                                            <th>פרטי לקוח</th>
+                                                            <th>סטטוס לקוח</th>
                                                             <th>פעולות</th>
                                                       </tr>
                                                       </thead>
@@ -60,27 +63,34 @@
                                                                   <span class="checkmark"></span>
                                                             </label>
                                                             </th>
-                                                            <th>{{$row['created_at']}}</th>
-                                                            <th>{{$row['name']}}</th>
-                                                            <th>{{$row['phone']}}</th>
-                                                            <th>{{$row['email']}}</th>
+                                                            <th>
+                                                                  <div style="max-width: 350px !important;">
+                                                                        <table class="table-ditalis table-hover table-bordered table-striped" style="width: 100%;">
+                                                                              <tbody>
+                                                                              <tr>
+                                                                                    <td><strong>{{$row['name']}}</strong></td>
+                                                                                    <th style=" text-align: right;"><strong>יצירה</strong></th>
+                                                                                    <td>{{$row['created_at']}}</td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>{{$row['email']}}</strong></td>
+                                                                                    <th style=" text-align: right;"><strong>עריכה</strong></th>
+                                                                                    <td>{{$row['update_at']}}4</td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><a href="tel:0549232204"><strong>{{$row['phone']}}</strong></a></td>
+                                                                              </tr>
+                                                                              </tbody>
+                                                                        </table>
+                                                                  </div>
+                                                            </th>
                                                             <th><span class="badge badge-pill float-right" style="background-color: {{$row['status_color']}}">{{$row['status_title']}}</span></th>
-                                                            <th>{{$row['from_lid']}}</th>
                                                             <th>פעולות</th>
                                                       </tr>
 @endforeach
                                                       </tbody>
                                                       <tfoot>
-                                                      <tr>
-                                                            <th>ID</th>
-                                                            <th>תאריך</th>
-                                                            <th>שם</th>
-                                                            <th>פלאפון</th>
-                                                            <th>מייל</th>
-                                                            <th>סטטוס</th>
-                                                            <th>מקור הגעה אחרון</th>
-                                                            <th>פעולות</th>
-                                                      </tr>
+
                                                       </tfoot>
                                                 </table>
                                           </div>
