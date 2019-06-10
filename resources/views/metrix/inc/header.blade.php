@@ -18,7 +18,7 @@
     <!-- Custom CSS -->
     <link href="{{ asset('metrix_file/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/extra-libs/multicheck/multicheck.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('metrix_file/assets/extra-libs/multicheck/multicheck.css')}}">
     <link href="{{ asset('metrix_file/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet')}}">
     <link href="{{ asset('metrix_file/dist/css/style.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -28,6 +28,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
 <![endif]-->
 </head>
 
