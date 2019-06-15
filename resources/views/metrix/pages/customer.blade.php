@@ -11,6 +11,13 @@
             }
 
       </style>
+{{--      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />--}}
+{{--      <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">--}}
+{{--      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>--}}
+{{--      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>--}}
+{{--      <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--}}
+{{--      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>--}}
+
       <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -41,17 +48,20 @@
                   <!-- Start Page Content -->
                   <!-- ============================================================== -->
             <div class="row">
-<div class="col-sm-6">
+<div class="col-sm-7">
                               <div class="card">
                                     <div class="card-body">
                                           <h5 class="card-title">לקוחות</h5>
                                           <div class="table-responsive">
+
+                                                <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-customer">הוספת לקוח חדש</a>
+                                                <br><br>
                                                 <table id="zero_config" class="table table-striped table-bordered">
                                                       <thead>
                                                       <tr>
                                                             <th>ID</th>
                                                             <th>פרטי לקוח</th>
-                                                            <th>סטטוס לקוח</th>
+
                                                             <th>פעולות</th>
                                                             <th>id-hidden</th>
                                                       </tr>
@@ -67,27 +77,36 @@
                                                             </td>
                                                             <td>
                                                                   <div style="max-width: 350px !important;">
-                                                                        <table class="table-ditalis table-hover table-bordered table-striped" style="width: 100%;">
+                                                                        <table class="" style="width: 100%;">
                                                                               <tbody>
                                                                               <tr>
+
                                                                                     <td><strong>{{$row['name']}}</strong></td>
                                                                                     <th style=" text-align: right;"><strong>יצירה</strong></th>
-                                                                                    <td>{{$row['created_at']}}</td>
+                                                                                    <td>{{date('d/m/Y h:i', strtotime($row['created_at']))}}</td>
                                                                               </tr>
                                                                               <tr>
                                                                                     <td><strong>{{$row['email']}}</strong></td>
                                                                                     <th style=" text-align: right;"><strong>עריכה</strong></th>
-                                                                                    <td>{{$row['update_at']}}4</td>
+                                                                                    <td>{{date('d/m/Y h:i', $row['update_at'])}}</td>
                                                                               </tr>
                                                                               <tr>
                                                                                     <td><a href="tel:0549232204"><strong>{{$row['phone']}}</strong></a></td>
+                                                                                    <th style=" text-align: right;"><strong>סטטוס</strong></th>
+                                                                                    <td><span class="badge badge-pill float-right" style="background-color: {{$row['status_color']}}">{{$row['status_title']}}</span></td>
                                                                               </tr>
                                                                               </tbody>
                                                                         </table>
                                                                   </div>
                                                             </td>
-                                                            <td><span class="badge badge-pill float-right" style="background-color: {{$row['status_color']}}">{{$row['status_title']}}</span></td>
-                                                            <td>פעולות</td>
+                                                            <td>
+                                                                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $row['id'] }}" data-original-title="Edit" class="edit btn btn-success edit-customer">
+                                                                        ערוך
+                                                                  </a>
+                                                                  <a href="javascript:void(0);" id="delete-user" data-toggle="tooltip" data-original-title="Delete" data-id="{{ $row['id'] }}" class="delete btn btn-danger">
+                                                                        מחק
+                                                                  </a>
+                                                            </td>
                                                             <td>{{$row['id']}}</td>
                                                       </tr>
 @endforeach
@@ -102,57 +121,62 @@
                               </div>
                         </div>
 
-      <div class="col-md-6">
+      <div class="col-md-5">
             <div class="card">
                   <div class="card-body">
                         <h5 class="card-title m-b-0">מוצרים שהתעניין/רכש</h5>
                   </div>
-                  <table class="table">
+                  <table class="table" id="customer_item_table">
                         <thead>
                         <tr>
-                              <th scope="col">Description</th>
-                              <th scope="col">Status</th>
-                              <th scope="col">Actions</th>
+
+                              <th scope="col">item_id</th>
+                              <th scope="col">from_lid</th>
+                              <th scope="col">status</th>
+                              <th scope="col">date</th>
+                              <th scope="col">id</th>
+                              <th scope="col">id</th>
+
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                              <td>Making The New Suit</td>
-                              <td class="text-success">Progress</td>
-                              <td>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">
-                                          <i class="mdi mdi-check"></i>
-                                    </a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                          </i><i class="mdi mdi-close"></i>
-                                    </a>
-                              </td>
-                        </tr>
-                        <tr>
-                              <td>Luanch My New Site</td>
-                              <td class="text-warning">Pending</td>
-                              <td>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">
-                                          <i class="mdi mdi-check"></i>
-                                    </a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                          </i><i class="mdi mdi-close"></i>
-                                    </a>
-                              </td>
-                        </tr>
-                        <tr>
-                              <td>Maruti Excellant Theme</td>
-                              <td class="text-danger">Cancled</td>
-                              <td>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">
-                                          <i class="mdi mdi-check"></i>
-                                    </a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                          </i><i class="mdi mdi-close"></i>
-                                    </a>
-                              </td>
-                        </tr>
-                        </tbody>
+{{--                        <tbody>--}}
+{{--                        <tr>--}}
+{{--                              <td>Making The New Suit</td>--}}
+{{--                              <td class="text-success">Progress</td>--}}
+{{--                              <td>--}}
+{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">--}}
+{{--                                          <i class="mdi mdi-check"></i>--}}
+{{--                                    </a>--}}
+{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">--}}
+{{--                                          </i><i class="mdi mdi-close"></i>--}}
+{{--                                    </a>--}}
+{{--                              </td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                              <td>Luanch My New Site</td>--}}
+{{--                              <td class="text-warning">Pending</td>--}}
+{{--                              <td>--}}
+{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">--}}
+{{--                                          <i class="mdi mdi-check"></i>--}}
+{{--                                    </a>--}}
+{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">--}}
+{{--                                          </i><i class="mdi mdi-close"></i>--}}
+{{--                                    </a>--}}
+{{--                              </td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                              <td>Maruti Excellant Theme</td>--}}
+{{--                              <td class="text-danger">Cancled</td>--}}
+{{--                              <td>--}}
+{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">--}}
+{{--                                          <i class="mdi mdi-check"></i>--}}
+{{--                                    </a>--}}
+{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">--}}
+{{--                                          </i><i class="mdi mdi-close"></i>--}}
+{{--                                    </a>--}}
+{{--                              </td>--}}
+{{--                        </tr>--}}
+{{--                        </tbody>--}}
                   </table>
             </div>
             <div class="card">
@@ -251,7 +275,7 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-
+      @include('metrix/inc/model')
 
       <!-- this page js -->
       <script src="{{ asset('metrix_file/assets/libs/jquery/dist/jquery.min.js')}}"></script>
@@ -260,15 +284,17 @@
       <script src="{{ asset('metrix_file/assets/extra-libs/DataTables/datatables.min.js')}}"></script>
       <script>
             /****************************************
-             *       Basic Table                   *
+             *      customer Table                   *
              ****************************************/
-           var table = $('#zero_config').DataTable({
+            var table = "",table_item = "";
+                  table = $('#zero_config').DataTable({
                   "columnDefs": [
                         {
-                              "targets": [ 4 ],
+                              "targets": [ 3 ],
                               "visible": false
                         },
                   ],
+                  order: [[0, 'desc']],
                   "language": {
                         "lengthMenu": "מציג _MENU_ רשומות בדף ",
                         "zeroRecords": "לא נמצאו רשומות",
@@ -285,7 +311,8 @@
                               "next":       "הבא",
                               "previous":   "הקודם"
                         }
-                  }
+                  },
+
             });
             $('#zero_config tbody').on( 'click', 'tr', function () {
 
@@ -299,7 +326,11 @@
                         var rowData = table.row('.selected').data();
 
                        // reloadTableCustomerHistory(rowData['id_customer']);
-                        console.log(rowData[4]);
+                        console.log(rowData[3]);
+                        if(table_item!=""){
+                              table_item.destroy();
+                        }
+                        customer_item_table(rowData[3]);
                         // reloadTableContactHistory(rowData);
                         //  reloadTableRemember(rowData);
                   }
@@ -307,6 +338,179 @@
 
                   //alert(rowData['id_customer']);
             } );
+
+            /****************************************
+             *      customer item Table                   *
+             ****************************************/
+            var SITEURL = '{{URL::to('')}}';
+           function customer_item_table(id) {
+                  console.log('the id: '+id);
+
+                        $.ajaxSetup({
+                              headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                              }
+                        });
+                  table_item = $('#customer_item_table').DataTable({
+                              // "stateSave": true,
+                              // "bProcessing": true,
+                              // "sAjaxSource": SITEURL + "/customer_item/"+id,
+                              //
+                              // "aoColumns": [
+                              //       { mData: 'item_name'},
+                              //       { mData: 'from_lid'},
+                              //       { mData: 'status'},
+                              //       { mData: 'date'},
+                              //       { mData: 'id'},
+                              //       { mData: 'id'},
+                              //
+                              // ],
+                              processing: true,
+                              serverSide: true,
+                              ajax: {
+                                    url: SITEURL + "/customer_item/"+id,
+                                    type: 'GET',
+                              },
+                              columns: [
+                                    {data: 'item_name', name: 'item_name', 'visible': true},
+                                    //{data: 'customer_id', name: 'customer_id', orderable: false,searchable: false},
+
+                                    { data: 'from_lid', name: 'from_lid' },
+                                    { data: 'status', name: 'status' },
+                                    { data: 'date', name: 'date' },
+                                    { data: 'id', name: 'id' },
+                                    {data: 'id', name: 'id', orderable: false}
+                              ],
+                             //order: [[0, 'desc']],
+                              "language": {
+                                    "lengthMenu": "מציג _MENU_ רשומות בדף ",
+                                    "zeroRecords": "לא נמצאו רשומות",
+                                    "info": "מציג דף _PAGE_ מתוך _PAGES_",
+                                    "infoEmpty": "אין רשומות קיימות",
+                                    "infoFiltered": "(filtered from _MAX_ total records)",
+                                    "emptyTable":     "אין מידע להצגה בטבלה זו",
+                                    "loadingRecords": "טוען...",
+                                    "processing":     "מעבד...",
+                                    "search":         "חיפוש:",
+                                    "paginate": {
+                                          "first":      "ראשון",
+                                          "last":       "אחרון",
+                                          "next":       "הבא",
+                                          "previous":   "הקודם"
+                                    }
+                              }
+                        });
+           }
+
+            $('#create-new-customer').click(function () {
+                  $('#btn-save').val("create-user");
+                  $('#user_id').val('');
+                  $('#userForm').trigger("reset");
+                  $('#userCrudModal').html("הוספת לקוח חדש");
+                  $('#customer-modal').modal('show');
+            });
+            $('body').on('click', '.edit-customer', function () {
+                  var user_id = $(this).data('id');
+                  $.get('customers/' + user_id +'/edit', function (data) {
+                        $('#name-error').hide();
+                        $('#email-error').hide();
+                        $('#userCrudModal').html("Edit User");
+                        $('#btn-save').val("edit-user");
+                        $('#customer-modal').modal('show');
+                        $('#user_id').val(data.id);
+                        $('#name').val(data.name);
+                        $('#email').val(data.email);
+                        $('#phone').val(data.phone);
+                        $('#status').val(data.status);
+                  })
+            });
+
+            $('body').on('click', '#delete-user', function () {
+
+                  var user_id = $(this).data("id");
+                  confirm("Are You sure want to delete !");
+
+                  $.ajax({
+                        type: "get",
+                        url: SITEURL + "/ajax-crud-list/delete/"+user_id,
+                        success: function (data) {
+                              var oTable = $('#laravel_datatable').dataTable();
+                              oTable.fnDraw(false);
+                        },
+                        error: function (data) {
+                              console.log('Error:', data);
+                        }
+                  });
+            });
+           // $(document).ready( function () {
+                  $('body').on('click', '#btn-save', function () {
+                        console.log('click');
+            //if ($("#userForm").length > 0) {
+
+
+                        $('#userForm').validate();
+                        if ($('#userForm').valid()) // check if form is valid
+                        {
+                              var actionType = $('#btn-save').val();
+                                          $('#btn-save').html('Sending..');
+
+                                          $.ajax({
+                                                data: $('#userForm').serialize(),
+                                                url: SITEURL + "/customers/store",
+                                                type: "POST",
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                      console.log('Ok:', data);
+                                                      $('#userForm').trigger("reset");
+                                                      $('#customer-modal').modal('hide');
+                                                      $('#btn-save').html('שמור');
+                                                      var oTable = $('#zero_config').dataTable();
+                                                      oTable.fnDraw(false);
+
+                                                },
+                                                error: function (data) {
+                                                      console.log('Error:', data);
+                                                      $('#btn-save').html('שמור');
+                                                }
+                                          });
+                        }
+                        else
+                        {
+                              console.log('Error:no validate');
+                        }
+
+
+                  // $("#userForm").validate({
+                  //
+                  //       submitHandler: function(form) {
+                  //
+                  //             var actionType = $('#btn-save').val();
+                  //             $('#btn-save').html('Sending..');
+                  //
+                  //             $.ajax({
+                  //                   data: $('#userForm').serialize(),
+                  //                   url: SITEURL + "customers/store",
+                  //                   type: "POST",
+                  //                   dataType: 'json',
+                  //                   success: function (data) {
+                  //                         console.log('Ok:', data);
+                  //                         $('#userForm').trigger("reset");
+                  //                         $('#customer-modal').modal('hide');
+                  //                         $('#btn-save').html('שמור');
+                  //                         var oTable = $('#zero_config').dataTable();
+                  //                         oTable.fnDraw(false);
+                  //
+                  //                   },
+                  //                   error: function (data) {
+                  //                         console.log('Error:', data);
+                  //                         $('#btn-save').html('שמור');
+                  //                   }
+                  //             });
+                  //       }
+                  // });
+          //  }
+            });
+
       </script>
      @endsection
     

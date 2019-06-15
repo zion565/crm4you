@@ -3,5 +3,5 @@
     
             @yield('content')
     
-       
+
  @include('metrix/inc/footer')   
