@@ -4,6 +4,7 @@
       <!-- ============================================================== -->
       <!-- Page wrapper  -->
       <!-- ============================================================== -->
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <style >
             .table td, .table th{
                   padding: 2px !important;
@@ -57,7 +58,7 @@
                                                 <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-customer">הוספת לקוח חדש</a>
                                                 <br><br>
                                                 <table id="zero_config" class="table table-striped table-bordered">
-                                                      <thead>
+
                                                       <tr>
                                                             <th>ID</th>
                                                             <th>פרטי לקוח</th>
@@ -65,55 +66,53 @@
                                                             <th>פעולות</th>
                                                             <th>id-hidden</th>
                                                       </tr>
-                                                      </thead>
+
                                                       <tbody>
-                                                      @foreach($all_customer as $row)
-                                                      <tr>
-                                                            <td>
-                                                            <label class="customcheckbox">{{$row['id']}}
-                                                                  <input type="checkbox" class="listCheckbox">
-                                                                  <span class="checkmark"></span>
-                                                            </label>
-                                                            </td>
-                                                            <td>
-                                                                  <div style="max-width: 350px !important;">
-                                                                        <table class="" style="width: 100%;">
-                                                                              <tbody>
-                                                                              <tr>
+{{--                                                      @foreach($all_customer as $row)--}}
+{{--                                                      <tr>--}}
+{{--                                                            <td>--}}
+{{--                                                            <label class="customcheckbox">{{$row['id']}}--}}
+{{--                                                                  <input type="checkbox" class="listCheckbox">--}}
+{{--                                                                  <span class="checkmark"></span>--}}
+{{--                                                            </label>--}}
+{{--                                                            </td>--}}
+{{--                                                            <td>--}}
+{{--                                                                  <div style="max-width: 350px !important;">--}}
+{{--                                                                        <table class="" style="width: 100%;">--}}
+{{--                                                                              <tbody>--}}
+{{--                                                                              <tr>--}}
 
-                                                                                    <td><strong>{{$row['name']}}</strong></td>
-                                                                                    <th style=" text-align: right;"><strong>יצירה</strong></th>
-                                                                                    <td>{{date('d/m/Y h:i', strtotime($row['created_at']))}}</td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                    <td><strong>{{$row['email']}}</strong></td>
-                                                                                    <th style=" text-align: right;"><strong>עריכה</strong></th>
-                                                                                    <td>{{date('d/m/Y h:i', $row['update_at'])}}</td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                    <td><a href="tel:0549232204"><strong>{{$row['phone']}}</strong></a></td>
-                                                                                    <th style=" text-align: right;"><strong>סטטוס</strong></th>
-                                                                                    <td><span class="badge badge-pill float-right" style="background-color: {{$row['status_color']}}">{{$row['status_title']}}</span></td>
-                                                                              </tr>
-                                                                              </tbody>
-                                                                        </table>
-                                                                  </div>
-                                                            </td>
-                                                            <td>
-                                                                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $row['id'] }}" data-original-title="Edit" class="edit btn btn-success edit-customer">
-                                                                        ערוך
-                                                                  </a>
-                                                                  <a href="javascript:void(0);" id="delete-user" data-toggle="tooltip" data-original-title="Delete" data-id="{{ $row['id'] }}" class="delete btn btn-danger">
-                                                                        מחק
-                                                                  </a>
-                                                            </td>
-                                                            <td>{{$row['id']}}</td>
-                                                      </tr>
-@endforeach
+{{--                                                                                    <td><strong>{{$row['name']}}</strong></td>--}}
+{{--                                                                                    <th style=" text-align: right;"><strong>יצירה</strong></th>--}}
+{{--                                                                                    <td>{{date('d/m/Y h:i', strtotime($row['created_at']))}}</td>--}}
+{{--                                                                              </tr>--}}
+{{--                                                                              <tr>--}}
+{{--                                                                                    <td><strong>{{$row['email']}}</strong></td>--}}
+{{--                                                                                    <th style=" text-align: right;"><strong>עריכה</strong></th>--}}
+{{--                                                                                    <td>{{date('d/m/Y h:i', $row['update_at'])}}</td>--}}
+{{--                                                                              </tr>--}}
+{{--                                                                              <tr>--}}
+{{--                                                                                    <td><a href="tel:0549232204"><strong>{{$row['phone']}}</strong></a></td>--}}
+{{--                                                                                    <th style=" text-align: right;"><strong>סטטוס</strong></th>--}}
+{{--                                                                                    <td><span class="badge badge-pill float-right" style="background-color: {{$row['status_color']}}">{{$row['status_title']}}</span></td>--}}
+{{--                                                                              </tr>--}}
+{{--                                                                              </tbody>--}}
+{{--                                                                        </table>--}}
+{{--                                                                  </div>--}}
+{{--                                                            </td>--}}
+{{--                                                            <td>--}}
+{{--                                                                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $row['id'] }}" data-original-title="Edit" class="edit btn btn-success edit-customer">--}}
+{{--                                                                        ערוך--}}
+{{--                                                                  </a>--}}
+{{--                                                                  <a href="javascript:void(0);" id="delete-user" data-toggle="tooltip" data-original-title="Delete" data-id="{{ $row['id'] }}" class="delete btn btn-danger">--}}
+{{--                                                                        מחק--}}
+{{--                                                                  </a>--}}
+{{--                                                            </td>--}}
+{{--                                                            <td>{{$row['id']}}</td>--}}
+{{--                                                      </tr>--}}
+{{--@endforeach--}}
                                                       </tbody>
-                                                      <tfoot>
 
-                                                      </tfoot>
                                                 </table>
                                           </div>
 
@@ -286,8 +285,40 @@
             /****************************************
              *      customer Table                   *
              ****************************************/
+            var SITEURL = '{{URL::to('')}}';
+
             var table = "",table_item = "";
+           // var selected = [];
+            $(document).ready( function () {
                   table = $('#zero_config').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        ajax: SITEURL + "/customers",
+
+                        // ajax: {
+                        //       url: SITEURL + "/customers/0",
+                        //       type: 'GET',
+                        // },
+                        // "aoColumns": [
+                        //       { mData: 'id_checkbox'},
+                        //       { mData: 'ditalis'},
+                        //       { mData: 'action'},
+                        //       { mData: 'id'}
+                        // ],
+                        columns: [
+                              {data: 'id_checkbox'},
+                              //{data: 'customer_id', name: 'customer_id', orderable: false,searchable: false},
+                              { data: 'ditalis'},
+                              { data: 'action' },
+                              {data: 'id', 'visible': false}
+                              // {data: 'id', name: 'id', orderable: false}
+                        ],
+                        "rowCallback": function( row, data ) {
+
+                              // if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                              //       $(row).addClass('selected');
+                              // }
+                        },
                   "columnDefs": [
                         {
                               "targets": [ 3 ],
@@ -295,6 +326,7 @@
                         },
                   ],
                   order: [[0, 'desc']],
+                        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                   "language": {
                         "lengthMenu": "מציג _MENU_ רשומות בדף ",
                         "zeroRecords": "לא נמצאו רשומות",
@@ -314,23 +346,24 @@
                   },
 
             });
+            });
             $('#zero_config tbody').on( 'click', 'tr', function () {
 
-                  if ( $(this).hasClass('selected') ) {
-                        $(this).removeClass('selected');
+                  if ( $(this).hasClass('st-selected') ) {
+                        $(this).removeClass('st-selected');
                   }
                   else {
-                        table.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
+                        table.$('tr.st-selected').removeClass('st-selected');
+                        $(this).addClass('st-selected');
 
-                        var rowData = table.row('.selected').data();
+                        var rowData = table.row('.st-selected').data();
 
                        // reloadTableCustomerHistory(rowData['id_customer']);
-                        console.log(rowData[3]);
+                        console.log(rowData['id']);
                         if(table_item!=""){
                               table_item.destroy();
                         }
-                        customer_item_table(rowData[3]);
+                        customer_item_table(rowData['id']);
                         // reloadTableContactHistory(rowData);
                         //  reloadTableRemember(rowData);
                   }
@@ -338,11 +371,26 @@
 
                   //alert(rowData['id_customer']);
             } );
+            // $('#zero_config tbody').on('click', 'tr', function () {
+            //       var id = this.id;
+            //       console.log('cli');
+            //       console.log(id);
+            //       var index = $.inArray(id, selected);
+            //
+            //       if ( index === -1 ) {
+            //             selected.push( id );
+            //       } else {
+            //             selected.splice( index, 1 );
+            //       }
+            //
+            //       $(this).toggleClass('selected');
+            // } );
+
 
             /****************************************
              *      customer item Table                   *
              ****************************************/
-            var SITEURL = '{{URL::to('')}}';
+
            function customer_item_table(id) {
                   console.log('the id: '+id);
 
@@ -404,7 +452,7 @@
 
             $('#create-new-customer').click(function () {
                   $('#btn-save').val("create-user");
-                  $('#user_id').val('');
+                  $('#id').val('');
                   $('#userForm').trigger("reset");
                   $('#userCrudModal').html("הוספת לקוח חדש");
                   $('#customer-modal').modal('show');
@@ -417,7 +465,7 @@
                         $('#userCrudModal').html("Edit User");
                         $('#btn-save').val("edit-user");
                         $('#customer-modal').modal('show');
-                        $('#user_id').val(data.id);
+                        $('#id').val(data.id);
                         $('#name').val(data.name);
                         $('#email').val(data.email);
                         $('#phone').val(data.phone);
@@ -428,14 +476,19 @@
             $('body').on('click', '#delete-user', function () {
 
                   var user_id = $(this).data("id");
-                  confirm("Are You sure want to delete !");
+                  confirm("בטוח שברצונך למחוק?");
 
                   $.ajax({
                         type: "get",
-                        url: SITEURL + "/ajax-crud-list/delete/"+user_id,
+                        url: SITEURL + "/customers/delete/"+user_id,
                         success: function (data) {
-                              var oTable = $('#laravel_datatable').dataTable();
-                              oTable.fnDraw(false);
+                             // var dTable = $('#zero_config').dataTable();
+
+                              //table.order( [[0, 'desc']] ).draw();
+                              table.page( 'next' ).draw( 'page' );
+                              //dTable.fnDraw(false);
+                              console.log('after drow');
+                             // $('#zero_config').DataTable();
                         },
                         error: function (data) {
                               console.log('Error:', data);
@@ -446,8 +499,6 @@
                   $('body').on('click', '#btn-save', function () {
                         console.log('click');
             //if ($("#userForm").length > 0) {
-
-
                         $('#userForm').validate();
                         if ($('#userForm').valid()) // check if form is valid
                         {
@@ -459,13 +510,16 @@
                                                 url: SITEURL + "/customers/store",
                                                 type: "POST",
                                                 dataType: 'json',
+                                                beforeSend: function (request) {
+                                                      return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                                                },
                                                 success: function (data) {
                                                       console.log('Ok:', data);
                                                       $('#userForm').trigger("reset");
                                                       $('#customer-modal').modal('hide');
                                                       $('#btn-save').html('שמור');
                                                       var oTable = $('#zero_config').dataTable();
-                                                      oTable.fnDraw(false);
+                                                      oTable.fnDraw();
 
                                                 },
                                                 error: function (data) {

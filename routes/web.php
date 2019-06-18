@@ -26,6 +26,7 @@ Route::get('/mlogin', 'MloginController@index');
 Route::resource('/customers', 'CustomerController');
 Route::post('/customers/store', 'CustomerController@store');
 Route::get('/customers/delete/{id}', 'CustomerController@destroy');
+//Route::get('/customers/all', 'CustomerController@all');
 
 Route::resource('/customer_item', 'customerItemController');
 Route::post('/customer_item/store', 'customerItemController@store');

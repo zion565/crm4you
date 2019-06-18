@@ -18,6 +18,7 @@
     <!-- Custom CSS -->
     <link href="{{ asset('metrix_file/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('metrix_file/assets/libs/crm4you-css/zion_custom.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('metrix_file/assets/libs/select2/dist/css/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('metrix_file/assets/libs/jquery-minicolors/jquery.minicolors.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('metrix_file/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">

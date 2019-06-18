@@ -1,3 +1,4 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="modal fade" id="customer-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -6,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <form id="userForm" name="userForm" class="form-horizontal">
-                    <input type="hidden" name="user_id" id="user_id">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 control-label">שם</label>
                         <div class="col-sm-9">
