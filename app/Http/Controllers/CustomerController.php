@@ -35,8 +35,9 @@ class CustomerController extends Controller
             $all_customer = tbl_customer::query()
                 ->select('tbl_customer.id', 'tbl_customer.created_at', 'tbl_customer.update_at', 'tbl_customer.name', 'tbl_customer.phone', 'tbl_customer.email', 'tbl_status_setting.id as status_id','tbl_status_setting.color as status_color','tbl_status_setting.title as status_title')
                 ->leftJoin('tbl_status_setting', 'tbl_customer.status', '=', 'tbl_status_setting.id')
-                ->limit(500)
-                ->orderByDesc('id')
+                ->limit(65)
+               // ->orderByDesc('id')
+                ->orderBy('id')
                 ->get();
 
             return datatables()->of($all_customer)
@@ -45,30 +46,34 @@ class CustomerController extends Controller
                         '<input type="checkbox" class="listCheckbox">
                                                                   <span class="checkmark"></span>
                                                             </label>';
-                })->addColumn('ditalis', function ($row) {
+                })
+                ->addColumn('ditalis', function ($row) {
                     return '<div style="max-width: 350px !important;">
                                                                         <table class="" style="width: 100%;">
                                                                              
                                                                               <tr>
 
-                                                                                    <td><strong>'.$row["name"].'</strong></td>
+                                                                                    <td colspan="2"><strong>'.$row["name"].'</strong></td>
+                                                                                    <td colspan="2"><strong>'.$row['email'].'</strong></td>
+                                                                                    
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td colspan="2"><a href="tel:0549232204"><strong>'.$row["phone"].'</strong></a></td>
+                                                                                    <td colspan="2"><span class="badge badge-pill float-right" style="background-color: '.$row["status_color"].'">'.$row["status_title"].'</span></td>
+                                                                             
+                                                                             
+                                                                              </tr>
+                                                                              <tr>
                                                                                     <td style=" text-align: right;"><strong>יצירה</strong></td>
                                                                                     <td>'.date("d/m/Y h:i", strtotime($row["created_at"])).'</td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                    <td><strong>'.$row['email'].'</strong></td>
                                                                                     <td style=" text-align: right;"><strong>עריכה</strong></td>
                                                                                     <td>'.date("d/m/Y h:i", $row["update_at"]).'</td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                    <td><a href="tel:0549232204"><strong>'.$row["phone"].'</strong></a></td>
-                                                                                    <td style=" text-align: right;"><strong>סטטוס</strong></td>
-                                                                                    <td><span class="badge badge-pill float-right" style="background-color: '.$row["status_color"].'">'.$row["status_title"].'</span></td>
-                                                                              </tr>
+                                                                               </tr>
                                                                               
                                                                         </table>
                                                                   </div>';
-                })->addColumn('action', function ($row) {
+                })
+                ->addColumn('action', function ($row) {
                     return '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'. $row["id"].'" data-original-title="Edit" class="edit btn btn-success edit-customer">
                                                                         ערוך
                                                                   </a>
