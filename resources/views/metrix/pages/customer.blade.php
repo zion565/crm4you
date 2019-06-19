@@ -128,28 +128,19 @@
                   <table class="table" id="customer_item_table">
                         <thead>
                         <tr>
-
-                              <th scope="col">item_id</th>
-                              <th scope="col">from_lid</th>
-                              <th scope="col">status</th>
-                              <th scope="col">date</th>
                               <th scope="col">id</th>
-                              <th scope="col">id</th>
+                              <th scope="col">מוצר</th>
+{{--                              <th scope="col">מקור ליד</th>--}}
+{{--                              <th scope="col">סטאטוס</th>--}}
+{{--                              <th scope="col">תאריך</th>--}}
+{{--                              <th scope="col">פעולות</th>--}}
+{{--                              <th scope="col">id</th>--}}
 
                         </tr>
                         </thead>
 {{--                        <tbody>--}}
 {{--                        <tr>--}}
-{{--                              <td>Making The New Suit</td>--}}
-{{--                              <td class="text-success">Progress</td>--}}
-{{--                              <td>--}}
-{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">--}}
-{{--                                          <i class="mdi mdi-check"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">--}}
-{{--                                          </i><i class="mdi mdi-close"></i>--}}
-{{--                                    </a>--}}
-{{--                              </td>--}}
+
 {{--                        </tr>--}}
 {{--                        <tr>--}}
 {{--                              <td>Luanch My New Site</td>--}}
@@ -294,17 +285,6 @@
                         processing: true,
                         serverSide: true,
                         ajax: SITEURL + "/customers",
-
-                        // ajax: {
-                        //       url: SITEURL + "/customers/0",
-                        //       type: 'GET',
-                        // },
-                        // "aoColumns": [
-                        //       { mData: 'id_checkbox'},
-                        //       { mData: 'ditalis'},
-                        //       { mData: 'action'},
-                        //       { mData: 'id'}
-                        // ],
                         columns: [
                               {data: 'id_checkbox'},
                               //{data: 'customer_id', name: 'customer_id', orderable: false,searchable: false},
@@ -400,37 +380,34 @@
                               }
                         });
                   table_item = $('#customer_item_table').DataTable({
-                              // "stateSave": true,
-                              // "bProcessing": true,
-                              // "sAjaxSource": SITEURL + "/customer_item/"+id,
-                              //
-                              // "aoColumns": [
-                              //       { mData: 'item_name'},
-                              //       { mData: 'from_lid'},
-                              //       { mData: 'status'},
-                              //       { mData: 'date'},
-                              //       { mData: 'id'},
-                              //       { mData: 'id'},
-                              //
-                              // ],
-                              processing: true,
-                              serverSide: true,
-                              ajax: {
-                                    url: SITEURL + "/customer_item/"+id,
-                                    type: 'GET',
-                              },
-                              columns: [
-                                    {data: 'item_name', name: 'item_name', 'visible': true},
-                                    //{data: 'customer_id', name: 'customer_id', orderable: false,searchable: false},
+                        processing: true,
+                        serverSide: true,
+                        ajax: SITEURL + "/customer_item/"+id,
+                        columns: [
+                              { data: 'id_checkbox'},
+                              { data: 'item'},
+                              // { data: 'from_lid'},
+                              // { data: 'status'},
+                              // { data: 'date'},
+                              // { data: 'action'},
+                              // { data: 'id'}
+                        ],
 
-                                    { data: 'from_lid', name: 'from_lid' },
-                                    { data: 'status', name: 'status' },
-                                    { data: 'date', name: 'date' },
-                                    { data: 'id', name: 'id' },
-                                    {data: 'id', name: 'id', orderable: false}
-                              ],
-                             //order: [[0, 'desc']],
-                              "language": {
+                        "rowCallback": function( row, data ) {
+
+                              // if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                              //       $(row).addClass('selected');
+                              // }
+                        },
+                        // "columnDefs": [
+                        //       {
+                        //             "targets": [ 5 ],
+                        //             "visible": false
+                        //       },
+                        // ],
+                        order: [[0, 'desc']],
+                        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                        "language": {
                                     "lengthMenu": "מציג _MENU_ רשומות בדף ",
                                     "zeroRecords": "לא נמצאו רשומות",
                                     "info": "מציג דף _PAGE_ מתוך _PAGES_",

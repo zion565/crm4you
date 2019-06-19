@@ -8,6 +8,24 @@ use Redirect,Response;
 
 class customerItemController extends Controller
 {
+
+    public $arrstatus;
+    public $arrstatus_color;
+
+    public function __construct()
+    {
+        $arrstatus_new_customer = [];
+        $arrstatus_new_customer[0] = "פתוח";
+        $arrstatus_new_customer[1] = "רכש";
+        $arrstatus_new_customer[2] = "לא רכש";
+        $arrstatus_new_customer_color = [];
+        $arrstatus_new_customer_color[0] = "#ffdda5";
+        $arrstatus_new_customer_color[1] = "#d8f5e8";
+        $arrstatus_new_customer_color[2] = "#ffa68d96";
+
+        $this->arrstatus = $arrstatus_new_customer;
+        $this->arrstatus_color =$arrstatus_new_customer_color;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,38 +75,78 @@ class customerItemController extends Controller
      */
     public function show($customer_id)
     {
+
        // if(request()->ajax()) {
-            $customer = tbl_new_customer::query()
+            $customer_items = tbl_new_customer::query()
                 ->leftjoin('tbl_accounting_items', 'tbl_history_new_customer.item_id', '=', 'tbl_accounting_items.id')
                 ->select('tbl_history_new_customer.id','tbl_accounting_items.item_name', 'tbl_history_new_customer.from_lid', 'tbl_history_new_customer.status', 'tbl_history_new_customer.date')
                 ->where('tbl_history_new_customer.customer_id',$customer_id)
                 ->get();
-           $customer_result = array();
 
-//        echo '<pre>';
-//        print_r($customer);
-//        echo '</pre>';
-//        echo '<hr>';
-         foreach($customer as $row){
-////                $replacedString = preg_replace("/\\\\u([0-9abcdef]{4})/", "&#x$1;", $row['item_name']);
-////                $customer['item_name'] = mb_convert_encoding($replacedString, 'ISO-8859-1');
-             $row['date'] = date('d/m/Y h:i', $row['date']);
-              $customer_result[0] = $row;
-              }
-//        echo '<pre>';
-//            print_r($customer_result);
-//        echo '</pre>';
-//            die();
-        $results = array(
-            "sEcho" => 1,
-            "iTotalRecords" => 2,
-            "iTotalDisplayRecords" => 3,
-            "aaData"=>$customer_result);
+        return datatables()->of($customer_items)
 
-            return Response::json($results);
+    ->addColumn('item', function ($row) {
+        return '<div style="background-color: '.$this->arrstatus_color[$row['status']].'" class="row col-lg-12">
+<div class="col-md-4">'.$row['item_name'].'</div>
+<div class="col-md-3">'.$row['from_lid'].'</div>
+<div class="col-md-2">'.$this->arrstatus[$row['status']].'</div>
+<div class="col-md-3">'.date('d/m/Y h:i', $row['date']).'</div></div>
+<div class="text-center" >
+<div class="col-lg-12" ><a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row["id"] .'" data-original-title="Edit" class="edit btn btn-success btn-sm edit-customer-item">
+    ערוך
+    </a>
+    <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-danger btn-sm">
+    מחק
+    </a>
+    <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-outline-success btn-sm">
+    רכש
+    </a>
+    <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-outline-danger btn-sm">
+    לא רכש
+    </a></div></div>
+    ';
+    })
+//            ->addColumn('item', function ($row) {
+//                return '<td>'.$row['item_name'].'</td>';
+//            })
+//            ->addColumn('from_lid', function ($row) {
+//                return '<td class="text-success">'.$row['from_lid'].'</td>';
+//
+//            })
+//            ->addColumn('status', function ($row) {
+//                return '<td>'.$this->arrstatus[$row['status']].'</td>';
+//
+//            })
+//            ->addColumn('date', function ($row) {
+//                return '<td>'.date('d/m/Y h:i', $row['date']).'</td>';
+//
+//            })
+//            ->addColumn('action', function ($row) {
+//                return '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'. $row["id"].'" data-original-title="Edit" class="edit btn btn-success btn-sm edit-customer-item">
+//                                                                        ערוך
+//                                                                  </a>
+//                                                                  <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-danger btn-sm">
+//                                                                        מחק
+//                                                                  </a>
+//                                                                  <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-outline-success btn-sm">
+//                                                                        רכש
+//                                                                  </a>
+//                                                                  <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-outline-danger btn-sm">
+//                                                                        לא רכש
+//                                                                  </a>';
+//
+//            })
+            ->addColumn('id_checkbox', function ($row) {
+                return '<label class="customcheckbox">'.$row['id'].
+                    '<input type="checkbox" class="listCheckbox">
+                                                                  <span class="checkmark"></span>
+                                                            </label>';
+            })
+//            ->rawColumns(['item','from_lid','status','date','action','id_checkbox'])
+            ->rawColumns(['item','id_checkbox'])
 
-        //}
-        //die('error- not in function');
+            ->addIndexColumn()
+            ->make(true);
     }
 
     /**
