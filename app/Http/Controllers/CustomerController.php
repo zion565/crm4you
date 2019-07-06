@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\tbl_accounting_items;
 use App\tbl_customer;
 use App\tbl_status_setting;
+use App\tbl_from_lid_setting;
 use Illuminate\Http\Request;
 use Redirect,Response;
 use Illuminate\Routing\Route;
@@ -35,17 +37,16 @@ class CustomerController extends Controller
             $all_customer = tbl_customer::query()
                 ->select('tbl_customer.id', 'tbl_customer.created_at', 'tbl_customer.update_at', 'tbl_customer.name', 'tbl_customer.phone', 'tbl_customer.email', 'tbl_status_setting.id as status_id','tbl_status_setting.color as status_color','tbl_status_setting.title as status_title')
                 ->leftJoin('tbl_status_setting', 'tbl_customer.status', '=', 'tbl_status_setting.id')
-                ->limit(65)
+               // ->limit(65)
                // ->orderByDesc('id')
                 ->orderBy('id')
                 ->get();
 
             return datatables()->of($all_customer)
                 ->addColumn('id_checkbox', function ($row) {
-                    return '<label class="customcheckbox">'.$row['id'].
-                        '<input type="checkbox" class="listCheckbox">
+                    return '<label class="customcheckbox"><input type="checkbox" class="listCheckbox">
                                                                   <span class="checkmark"></span>
-                                                            </label>';
+                                                            </label><br>'.$row['id'];
                 })
                 ->addColumn('ditalis', function ($row) {
                     return '<div style="max-width: 350px !important;">
@@ -77,7 +78,7 @@ class CustomerController extends Controller
                     return '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'. $row["id"].'" data-original-title="Edit" class="edit btn btn-success edit-customer">
                                                                         ערוך
                                                                   </a>
-                                                                  <a href="javascript:void(0);" id="delete-user" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-danger">
+                                                                  <a href="javascript:void(0);" id="delete-customer" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-danger">
                                                                         מחק
                                                                   </a>';
 
@@ -90,10 +91,22 @@ class CustomerController extends Controller
 
 
         $statuses = tbl_status_setting::orderBy('id')->get();
+        $items = tbl_accounting_items::orderBy('id')->get();
+        $from_lids = tbl_from_lid_setting::orderBy('id')->get();
+        $arrstatus_new_customer = [];
+        $arrstatus_new_customer[0] = "פתוח";
+        $arrstatus_new_customer[1] = "רכש";
+        $arrstatus_new_customer[2] = "לא רכש";
+        $arrstatus_new_customer_color = [];
+        $arrstatus_new_customer_color[0] = "label-warning";
+        $arrstatus_new_customer_color[1] = "label-success";
+        $arrstatus_new_customer_color[2] = "label-danger";
 
         return view('metrix/pages/customer')->with([
             'customer_noreed' => $this->customer_noreed,
-            'new_customer_noreed' => $this->new_customer_noreed,'statuses' => $statuses]);
+            'new_customer_noreed' => $this->new_customer_noreed,
+            'statuses' => $statuses,'items' => $items,'from_lids' => $from_lids,
+            'arrstatus_new_customer' => $arrstatus_new_customer, 'arrstatus_new_customer_color' => $arrstatus_new_customer_color]);
 
     }
 
@@ -126,7 +139,8 @@ class CustomerController extends Controller
             $tbl_customer->email =$request->email;
             $tbl_customer->phone =$request->phone;
             $tbl_customer->status =$request->status;
-
+            $tbl_customer->user_id = \Auth::user()->id;
+            $tbl_customer->created_at = time();
 
             $tbl_customer->save();
         }else{
@@ -137,7 +151,7 @@ class CustomerController extends Controller
             $tbl_customer->email =$request->email;
             $tbl_customer->phone =$request->phone;
             $tbl_customer->status =$request->status;
-
+            $tbl_customer->update_at = time();
             $tbl_customer->save();
 
         }

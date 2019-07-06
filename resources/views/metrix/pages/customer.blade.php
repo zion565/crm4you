@@ -56,7 +56,7 @@
                                           <div class="table-responsive">
 
                                                 <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-customer">הוספת לקוח חדש</a>
-                                                <br><br>
+
                                                 <table id="zero_config" class="table table-striped table-bordered">
 
                                                       <tr>
@@ -68,49 +68,7 @@
                                                       </tr>
 
                                                       <tbody>
-{{--                                                      @foreach($all_customer as $row)--}}
-{{--                                                      <tr>--}}
-{{--                                                            <td>--}}
-{{--                                                            <label class="customcheckbox">{{$row['id']}}--}}
-{{--                                                                  <input type="checkbox" class="listCheckbox">--}}
-{{--                                                                  <span class="checkmark"></span>--}}
-{{--                                                            </label>--}}
-{{--                                                            </td>--}}
-{{--                                                            <td>--}}
-{{--                                                                  <div style="max-width: 350px !important;">--}}
-{{--                                                                        <table class="" style="width: 100%;">--}}
-{{--                                                                              <tbody>--}}
-{{--                                                                              <tr>--}}
 
-{{--                                                                                    <td><strong>{{$row['name']}}</strong></td>--}}
-{{--                                                                                    <th style=" text-align: right;"><strong>יצירה</strong></th>--}}
-{{--                                                                                    <td>{{date('d/m/Y h:i', strtotime($row['created_at']))}}</td>--}}
-{{--                                                                              </tr>--}}
-{{--                                                                              <tr>--}}
-{{--                                                                                    <td><strong>{{$row['email']}}</strong></td>--}}
-{{--                                                                                    <th style=" text-align: right;"><strong>עריכה</strong></th>--}}
-{{--                                                                                    <td>{{date('d/m/Y h:i', $row['update_at'])}}</td>--}}
-{{--                                                                              </tr>--}}
-{{--                                                                              <tr>--}}
-{{--                                                                                    <td><a href="tel:0549232204"><strong>{{$row['phone']}}</strong></a></td>--}}
-{{--                                                                                    <th style=" text-align: right;"><strong>סטטוס</strong></th>--}}
-{{--                                                                                    <td><span class="badge badge-pill float-right" style="background-color: {{$row['status_color']}}">{{$row['status_title']}}</span></td>--}}
-{{--                                                                              </tr>--}}
-{{--                                                                              </tbody>--}}
-{{--                                                                        </table>--}}
-{{--                                                                  </div>--}}
-{{--                                                            </td>--}}
-{{--                                                            <td>--}}
-{{--                                                                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $row['id'] }}" data-original-title="Edit" class="edit btn btn-success edit-customer">--}}
-{{--                                                                        ערוך--}}
-{{--                                                                  </a>--}}
-{{--                                                                  <a href="javascript:void(0);" id="delete-user" data-toggle="tooltip" data-original-title="Delete" data-id="{{ $row['id'] }}" class="delete btn btn-danger">--}}
-{{--                                                                        מחק--}}
-{{--                                                                  </a>--}}
-{{--                                                            </td>--}}
-{{--                                                            <td>{{$row['id']}}</td>--}}
-{{--                                                      </tr>--}}
-{{--@endforeach--}}
                                                       </tbody>
 
                                                 </table>
@@ -125,49 +83,24 @@
                   <div class="card-body">
                         <h5 class="card-title m-b-0">מוצרים שהתעניין/רכש</h5>
                   </div>
-                  <table class="table" id="customer_item_table">
-                        <thead>
+                <div class="table-responsive">
+                <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-customer-item">הוספת מוצר</a>
+
+                <table class="table" id="customer_item_table">
+
                         <tr>
-                              <th scope="col">id</th>
-                              <th scope="col">מוצר</th>
-{{--                              <th scope="col">מקור ליד</th>--}}
-{{--                              <th scope="col">סטאטוס</th>--}}
-{{--                              <th scope="col">תאריך</th>--}}
-{{--                              <th scope="col">פעולות</th>--}}
-{{--                              <th scope="col">id</th>--}}
+                              <th>id</th>
+                              <th>פרטים</th>
+                            <th>שינוי סטטוס</th>
+                            <th>פעולות</th>
 
                         </tr>
-                        </thead>
-{{--                        <tbody>--}}
-{{--                        <tr>--}}
 
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                              <td>Luanch My New Site</td>--}}
-{{--                              <td class="text-warning">Pending</td>--}}
-{{--                              <td>--}}
-{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">--}}
-{{--                                          <i class="mdi mdi-check"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">--}}
-{{--                                          </i><i class="mdi mdi-close"></i>--}}
-{{--                                    </a>--}}
-{{--                              </td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                              <td>Maruti Excellant Theme</td>--}}
-{{--                              <td class="text-danger">Cancled</td>--}}
-{{--                              <td>--}}
-{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Update">--}}
-{{--                                          <i class="mdi mdi-check"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">--}}
-{{--                                          </i><i class="mdi mdi-close"></i>--}}
-{{--                                    </a>--}}
-{{--                              </td>--}}
-{{--                        </tr>--}}
-{{--                        </tbody>--}}
+                        <tbody>
+
+                        </tbody>
                   </table>
+                </div>
             </div>
             <div class="card">
                   <div class="card-body">
@@ -351,21 +284,89 @@
 
                   //alert(rowData['id_customer']);
             } );
-            // $('#zero_config tbody').on('click', 'tr', function () {
-            //       var id = this.id;
-            //       console.log('cli');
-            //       console.log(id);
-            //       var index = $.inArray(id, selected);
-            //
-            //       if ( index === -1 ) {
-            //             selected.push( id );
-            //       } else {
-            //             selected.splice( index, 1 );
-            //       }
-            //
-            //       $(this).toggleClass('selected');
-            // } );
+            $('#create-new-customer').click(function () {
+                $('#btn-customer-save').text("צור");
+                $('#id').val('');
+                $('#customerForm').trigger("reset");
+                $('#customerTitleModal').html("הוספת לקוח חדש");
+                $('#customer-modal').modal('show');
+            });
+            $('body').on('click', '.edit-customer', function () {
+                var customer_id = $(this).data('id');
+                $.get('customers/' + customer_id +'/edit', function (data) {
+                    $('#name-error').hide();
+                    $('#email-error').hide();
+                    $('#customerTitleModal').html("עריכת לקוח");
+                    $('#btn-customer-save').text("ערוך");
+                    $('#customer-modal').modal('show');
+                    $('#id').val(data.id);
+                    $('#name').val(data.name);
+                    $('#email').val(data.email);
+                    $('#phone').val(data.phone);
+                    $('#status').val(data.status);
+                })
+            });
 
+            $('body').on('click', '#delete-customer', function () {
+
+                var customer_id = $(this).data("id");
+                confirm("בטוח שברצונך למחוק?");
+
+                $.ajax({
+                    type: "get",
+                    url: SITEURL + "/customers/delete/"+customer_id,
+                    success: function (data) {
+                        // var dTable = $('#zero_config').dataTable();
+
+                        //table.order( [[0, 'desc']] ).draw();
+                        table.page( 'next' ).draw( 'page' );
+                        //dTable.fnDraw(false);
+                        console.log('after drow');
+                        // $('#zero_config').DataTable();
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+            // $(document).ready( function () {
+            $('body').on('click', '#btn-customer-save', function () {
+                console.log('click');
+                //if ($("#userForm").length > 0) {
+                $('#customerForm').validate();
+                if ($('#customerForm').valid()) // check if form is valid
+                {
+                    var actionType = $('#btn-save').val();
+                    $('#btn-save').html('Sending..');
+
+                    $.ajax({
+                        data: $('#customerForm').serialize(),
+                        url: SITEURL + "/customers/store",
+                        type: "POST",
+                        dataType: 'json',
+                        beforeSend: function (request) {
+                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                        },
+                        success: function (data) {
+                            console.log('Ok:', data);
+                            $('#customerForm').trigger("reset");
+                            $('#customer-modal').modal('hide');
+                            $('#btn-customer-save').html('שמור');
+                            var oTable = $('#zero_config').dataTable();
+                            oTable.fnDraw();
+
+                        },
+                        error: function (data) {
+                            console.log('Error:', data);
+                            $('#btn-save').html('שמור');
+                        }
+                    });
+                }
+                else
+                {
+                    console.log('Error:no validate');
+                }
+            });
 
             /****************************************
              *      customer item Table                   *
@@ -386,6 +387,8 @@
                         columns: [
                               { data: 'id_checkbox'},
                               { data: 'item'},
+                              {data: 'action_status'},
+                              { data: 'action_item' },
                               // { data: 'from_lid'},
                               // { data: 'status'},
                               // { data: 'date'},
@@ -426,120 +429,90 @@
                               }
                         });
            }
-
-            $('#create-new-customer').click(function () {
-                  $('#btn-save').val("create-user");
-                  $('#id').val('');
-                  $('#userForm').trigger("reset");
-                  $('#userCrudModal').html("הוספת לקוח חדש");
-                  $('#customer-modal').modal('show');
+            $('#create-new-customer-item').click(function () {
+                $('#btn-save-item').text("צור");
+                $('#id-item').val('');
+                $('#customerItemForm').trigger("reset");
+                $('#customerItemTitleModal').html("הוספת מוצר");
+                $('#customer-item-modal').modal('show');
             });
-            $('body').on('click', '.edit-customer', function () {
-                  var user_id = $(this).data('id');
-                  $.get('customers/' + user_id +'/edit', function (data) {
-                        $('#name-error').hide();
-                        $('#email-error').hide();
-                        $('#userCrudModal').html("Edit User");
-                        $('#btn-save').val("edit-user");
-                        $('#customer-modal').modal('show');
-                        $('#id').val(data.id);
-                        $('#name').val(data.name);
-                        $('#email').val(data.email);
-                        $('#phone').val(data.phone);
-                        $('#status').val(data.status);
-                  })
+            $('body').on('click', '.edit-customer-item', function () {
+                var customerItem_id = $(this).data('id');
+                $.get('customer_item/' + customerItem_id +'/edit', function (data) {
+                    $('#name-error').hide();
+                    $('#email-error').hide();
+                    $('#customerItemTitleModal').html("ערוך מוצר");
+                    $('#btn-save').val("ערוך");
+                    $('#customer-item-modal').modal('show');
+                    $('#item_id').val(data.id);
+                    $('#item').val(data.item_id);
+                    //$('input:radio[name=sex]').attr('checked',true);
+                    $('#status-castomer-item-'+data.status).attr('checked', 'checked');
+                    console.log(data.from_lid);
+                     $('#from_lid').val(data.from_lid.replace(" ","_"));
+
+                })
             });
 
-            $('body').on('click', '#delete-user', function () {
+            $('body').on('click', '#delete-customerItem', function () {
 
-                  var user_id = $(this).data("id");
-                  confirm("בטוח שברצונך למחוק?");
+                var customerItem_id = $(this).data("id");
+                confirm("בטוח שברצונך למחוק?");
 
-                  $.ajax({
-                        type: "get",
-                        url: SITEURL + "/customers/delete/"+user_id,
+                $.ajax({
+                    type: "get",
+                    url: SITEURL + "/customers/delete/"+customerItem_id,
+                    success: function (data) {
+                        // var dTable = $('#zero_config').dataTable();
+
+                        //table.order( [[0, 'desc']] ).draw();
+                        table.page( 'next' ).draw( 'page' );
+                        //dTable.fnDraw(false);
+                        console.log('after drow');
+                        // $('#zero_config').DataTable();
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+            // $(document).ready( function () {
+            $('body').on('click', '#btn-save', function () {
+                console.log('click');
+                //if ($("#userForm").length > 0) {
+                $('#customerItemForm').validate();
+                if ($('#customerItemForm').valid()) // check if form is valid
+                {
+                    var actionType = $('#btn-save').val();
+                    $('#btn-save').html('Sending..');
+
+                    $.ajax({
+                        data: $('#customerItemForm').serialize(),
+                        url: SITEURL + "/customer_item/store",
+                        type: "POST",
+                        dataType: 'json',
+                        beforeSend: function (request) {
+                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                        },
                         success: function (data) {
-                             // var dTable = $('#zero_config').dataTable();
+                            console.log('Ok:', data);
+                            $('#customerItemForm').trigger("reset");
+                            $('#customer-item-modal').modal('hide');
+                            $('#btn-item-save').html('שמור');
+                            var oTable = $('#zero_config').dataTable();
+                            oTable.fnDraw();
 
-                              //table.order( [[0, 'desc']] ).draw();
-                              table.page( 'next' ).draw( 'page' );
-                              //dTable.fnDraw(false);
-                              console.log('after drow');
-                             // $('#zero_config').DataTable();
                         },
                         error: function (data) {
-                              console.log('Error:', data);
+                            console.log('Error:', data);
+                            $('#btn-save').html('שמור');
                         }
-                  });
-            });
-           // $(document).ready( function () {
-                  $('body').on('click', '#btn-save', function () {
-                        console.log('click');
-            //if ($("#userForm").length > 0) {
-                        $('#userForm').validate();
-                        if ($('#userForm').valid()) // check if form is valid
-                        {
-                              var actionType = $('#btn-save').val();
-                                          $('#btn-save').html('Sending..');
-
-                                          $.ajax({
-                                                data: $('#userForm').serialize(),
-                                                url: SITEURL + "/customers/store",
-                                                type: "POST",
-                                                dataType: 'json',
-                                                beforeSend: function (request) {
-                                                      return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
-                                                },
-                                                success: function (data) {
-                                                      console.log('Ok:', data);
-                                                      $('#userForm').trigger("reset");
-                                                      $('#customer-modal').modal('hide');
-                                                      $('#btn-save').html('שמור');
-                                                      var oTable = $('#zero_config').dataTable();
-                                                      oTable.fnDraw();
-
-                                                },
-                                                error: function (data) {
-                                                      console.log('Error:', data);
-                                                      $('#btn-save').html('שמור');
-                                                }
-                                          });
-                        }
-                        else
-                        {
-                              console.log('Error:no validate');
-                        }
-
-
-                  // $("#userForm").validate({
-                  //
-                  //       submitHandler: function(form) {
-                  //
-                  //             var actionType = $('#btn-save').val();
-                  //             $('#btn-save').html('Sending..');
-                  //
-                  //             $.ajax({
-                  //                   data: $('#userForm').serialize(),
-                  //                   url: SITEURL + "customers/store",
-                  //                   type: "POST",
-                  //                   dataType: 'json',
-                  //                   success: function (data) {
-                  //                         console.log('Ok:', data);
-                  //                         $('#userForm').trigger("reset");
-                  //                         $('#customer-modal').modal('hide');
-                  //                         $('#btn-save').html('שמור');
-                  //                         var oTable = $('#zero_config').dataTable();
-                  //                         oTable.fnDraw(false);
-                  //
-                  //                   },
-                  //                   error: function (data) {
-                  //                         console.log('Error:', data);
-                  //                         $('#btn-save').html('שמור');
-                  //                   }
-                  //             });
-                  //       }
-                  // });
-          //  }
+                    });
+                }
+                else
+                {
+                    console.log('Error:no validate');
+                }
             });
 
       </script>

@@ -62,30 +62,9 @@ class customerItemController extends Controller
     public function store(Request $request)
     {
         $customer_item_id = $request->id;
-
-        if ($customer_item_id==''){
-            $tbl_customer_item = new tbl_new_customer;
-
-            $tbl_customer_item->name = $request->name;
-            $tbl_customer_item->email =$request->email;
-            $tbl_customer_item->phone =$request->phone;
-            $tbl_customer_item->status =$request->status;
-
-
-            $tbl_customer_item->save();
-        }else{
-
-            $tbl_customer_item = tbl_customer::find($customer_item_id);
-
-            $tbl_customer_item->name = $request->name;
-            $tbl_customer_item->email =$request->email;
-            $tbl_customer_item->phone =$request->phone;
-            $tbl_customer_item->status =$request->status;
-
-            $tbl_customer_item->save();
-
-        }
-        return Response::json($tbl_customer_item);
+        $customer_item  =   tbl_new_customer::updateOrCreate(['id' => $customer_item_id],
+            ['name' => $request->name, 'email' => $request->email]);
+        return Response::json($customer_item);
     }
 
     /**
@@ -97,27 +76,28 @@ class customerItemController extends Controller
     public function show($customer_id)
     {
 
-       // if(request()->ajax()) {
-            $customer_items = tbl_new_customer::query()
-                ->leftjoin('tbl_accounting_items', 'tbl_history_new_customer.item_id', '=', 'tbl_accounting_items.id')
-                ->select('tbl_history_new_customer.id','tbl_accounting_items.item_name', 'tbl_history_new_customer.from_lid', 'tbl_history_new_customer.status', 'tbl_history_new_customer.date')
-                ->where('tbl_history_new_customer.customer_id',$customer_id)
-                ->get();
+        // if(request()->ajax()) {
+        $customer_items = tbl_new_customer::query()
+            ->leftjoin('tbl_accounting_items', 'tbl_history_new_customer.item_id', '=', 'tbl_accounting_items.id')
+            ->select('tbl_history_new_customer.id','tbl_accounting_items.item_name', 'tbl_history_new_customer.from_lid', 'tbl_history_new_customer.status', 'tbl_history_new_customer.date')
+            ->where('tbl_history_new_customer.customer_id',$customer_id)
+            ->get();
 
         return datatables()->of($customer_items)
             ->addColumn('id_checkbox', function ($row) {
                 return '<label class="customcheckbox"><input type="checkbox" class="listCheckbox">
                                                                   <span class="checkmark"></span>
-                                                            </label><br>'.$row['id'].' ';
+                                                            </label><br>'.$row['id'].'';
             })
 
-    ->addColumn('item', function ($row) {
-        return '<div style="background-color: '.$this->arrstatus_color[$row['status']].'" class="row col-lg-12">
+            ->addColumn('item', function ($row) {
+                return '<div style="background-color: '.$this->arrstatus_color[$row['status']].'"><div class="row col-lg-12">
 <div class="col-md-6">'.$row['item_name'].'</div>
 <div class="col-md-6">'.$row['from_lid'].'</div>
 <div class="col-md-4">'.$this->arrstatus[$row['status']].'</div>
-<div class="col-md-8">'.date('d/m/Y h:i', $row['date']).'</div></div> ';
-    })
+<div class="col-md-3"><div class="text-right">'.date('d/m/Y h:i', $row['date']).'</div></div>
+</div></div>';
+            })
             ->addColumn('action_status', function ($row) {
                 return '
     <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-outline-success btn-sm">
@@ -126,8 +106,8 @@ class customerItemController extends Controller
     <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="'. $row["id"] .'" class="delete btn btn-outline-danger btn-sm">
     לא רכש
     </a>
-    ';})
-
+    ';
+            })
             ->addColumn('action_item', function ($row) {
                 return '<a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row["id"] .'" data-original-title="Edit" class="edit btn btn-success btn-sm edit-customer-item">
     ערוך
@@ -138,7 +118,6 @@ class customerItemController extends Controller
     ';
             })
             ->rawColumns(['id_checkbox','item','action_status','action_item'])
-
 
             ->addIndexColumn()
             ->make(true);
@@ -183,3 +162,46 @@ class customerItemController extends Controller
         return Response::json($customerItem);
     }
 }
+
+
+
+
+
+<tr role="row" class="odd">
+                                <td class="sorting_1">
+                                    <label class="customcheckbox">
+                                        <input type="checkbox" class="listCheckbox">
+                                    <span class="checkmark"></span>
+                                    </label>
+                                    <br>1007</td>
+
+                            <td>
+                                <div style="background-color: #d8f5e8" >
+                                    <div class="row col-lg-12">
+                                    <div class="col-md-6">רצועת מאלף</div>
+                                    <div class="col-md-6">הוספה ידנית</div>
+                                    <div class="pull-right col-md-4">רכש</div>
+                                    <div class="col-md-8"><div class="text-right">14/12/2018 09:19</div></div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                              <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="1007" class="delete btn btn-outline-success btn-sm">
+רכש
+                                </a>
+                               <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="1007" class="delete btn btn-outline-danger btn-sm">
+לא רכש
+</a>
+                            </td>
+
+
+                        <td>
+                            <a href="javascript:void(0)" data-toggle="tooltip" data-id="1007" data-original-title="Edit" class="edit btn btn-success btn-sm edit-customer-item">
+ערוך
+                            </a>
+                            <a href="javascript:void(0);" id="delete-customer-item" data-toggle="tooltip" data-original-title="Delete" data-id="1007" class="delete btn btn-danger btn-sm">
+מחק
+                            </a>
+                        </td>
+                        </tr>
